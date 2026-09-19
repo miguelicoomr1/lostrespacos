@@ -1,2 +1,2 @@
-import Link from "next/link";
-export default function AvisoLegal(){return <main className="page-shell legal"><header className="page-header"><strong>LOS TRES PACOS</strong><Link href="/">Volver al inicio</Link></header><h1 className="page-title">Aviso legal</h1><p>Esta página está pendiente de completar con la identidad legal del titular, NIF, domicilio y correo electrónico de contacto. No se publicarán datos inventados.</p></main>}
+import { SiteFooter, SiteHeader } from "../../components/site-chrome";
+export default function AvisoLegal(){return <main className="page-shell legal"><SiteHeader/><h1 className="page-title">Aviso legal</h1><p>Esta página está pendiente de completar con la identidad legal del titular, NIF, domicilio y correo electrónico de contacto. No se publicarán datos inventados.</p><SiteFooter/></main>}
