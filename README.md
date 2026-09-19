@@ -1,27 +1,32 @@
 # Los Tres Pacos · Portmán
 
-Sitio web estático de Los Tres Pacos, preparado para publicarse directamente con GitHub Pages. No necesita Node.js, compilación ni servidor para mostrar sus páginas públicas.
+## Web pública
 
-## Estructura
+Web estática en HTML, CSS y JavaScript. Abre index.html directamente; no necesita instalación ni compilación.
 
-```text
-index.html                 Página de inicio
-pages/
-  nosotros.html            Historia y propuesta del café-bar
-  carta.html               Carta gastronómica
-  galeria.html             Galería del local e identidad
-  reservas.html            Solicitud de reservas y aforo por zona
-  contacto.html            Dirección, teléfono y redes sociales
-assets/
-  site.css                 Estilos comunes y diseño responsive
-  site.js                  Menú móvil y mensaje del formulario estático
-public/images/             Logotipos e imágenes, incluido el favicon
-```
+- index.html: inicio.
+- pages/: nosotros, carta completa, galería, reservas y contacto.
+- assets/: estilos y navegación móvil, más el comportamiento original del formulario.
+- public/images/: imágenes del establecimiento.
 
-## Publicación en GitHub Pages
+Para GitHub Pages, publica la rama main desde la raíz del repositorio.
 
-GitHub Pages debe publicar la rama `main` desde la carpeta raíz del repositorio. La portada es `index.html`; las demás secciones son documentos HTML independientes enlazados desde el menú.
+## Reservas
 
-## Reservas y zona privada
+El formulario de pages/reservas.html conserva sus campos y su comportamiento original: muestra un mensaje para confirmar por teléfono. Todavía no envía ni guarda solicitudes. La carta conserva los 55 platos recuperados.
 
-La página de reservas muestra las capacidades actuales: salón interior (30), salón exterior (70) y terraza (50). Al ser una web estática, no confirma reservas ni almacena datos: dirige al teléfono del establecimiento para la confirmación. La gestión privada requiere un backend y permanece en la versión con servidor.
+## Panel privado conservado para la próxima integración
+
+Se conserva el código original del panel (agenda, zonas, carta y galería), el acceso privado y las rutas de reservas:
+
+- app/admin/ y components/admin-*.tsx: panel y acceso.
+- app/api/admin/ y app/api/reservations/: rutas originales del servidor.
+- app/reservas/: formulario original de la versión con servidor.
+- app/layout.tsx, app/globals.css y components/site-chrome.tsx: presentación original.
+- lib/, db/ y drizzle/: sesión, catálogo, lógica y esquema originales.
+
+Este código queda pendiente de configurar y no se ejecuta en GitHub Pages. El enlace «Zona privada» de la portada conserva la dirección anterior del panel; no se ha comprobado su despliegue.
+
+La implementación conservada utiliza Cloudflare D1 y una contraseña de administración. La conexión con Supabase, la adaptación del esquema y de la autenticación, y la configuración de compilación y despliegue en Cloudflare quedan para más adelante. No se han añadido credenciales ni activado servicios.
+
+Las fuentes de la web pública se cargan desde Google Fonts. Antes de publicar, completa la información legal del titular con sus datos reales.

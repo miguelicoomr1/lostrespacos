@@ -1,2 +1,0 @@
-import { SiteFooter, SiteHeader } from "../../components/site-chrome";
-export default function Privacidad(){return <main className="page-shell legal"><SiteHeader/><h1 className="page-title">Privacidad</h1><p>Los datos enviados mediante reserva se usan únicamente para gestionar la solicitud. La información legal del responsable, plazos de conservación y derechos de protección de datos se añadirá con los datos del titular antes de la publicación pública.</p><SiteFooter/></main>}
