@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function PoliticaCancelacion(){return <main className="page-shell legal"><header className="page-header"><strong>LOS TRES PACOS</strong><Link href="/">Volver al inicio</Link></header><h1 className="page-title">Política de cancelación</h1><p>La política definitiva de cambios, cancelaciones y ausencias debe ser facilitada por Los Tres Pacos antes de su publicación. Actualmente, la solicitud de reserva queda pendiente de confirmación por el establecimiento.</p></main>}

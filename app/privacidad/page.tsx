@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Privacidad(){return <main className="page-shell legal"><header className="page-header"><strong>LOS TRES PACOS</strong><Link href="/">Volver al inicio</Link></header><h1 className="page-title">Privacidad</h1><p>Los datos enviados mediante reserva se usan únicamente para gestionar la solicitud. La información legal del responsable, plazos de conservación y derechos de protección de datos se añadirá con los datos del titular antes de la publicación pública.</p></main>}

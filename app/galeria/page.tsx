@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Galeria(){return <main className="page-shell"><header className="page-header"><strong>LOS TRES PACOS</strong><Link href="/">Volver al inicio</Link></header><p className="section-label">GALERÍA</p><h1 className="page-title">El lugar<br />también sirve.</h1><p className="page-lead">Próximamente, una selección de fotografías del local, la terraza, la gastronomía, el ambiente y los detalles de Los Tres Pacos.</p><div className="gallery-hero" role="img" aria-label="Fachada de Los Tres Pacos en Portmán" /></main>}

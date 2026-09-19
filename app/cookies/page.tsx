@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Cookies(){return <main className="page-shell legal"><header className="page-header"><strong>LOS TRES PACOS</strong><Link href="/">Volver al inicio</Link></header><h1 className="page-title">Cookies</h1><p>La web no activa tecnologías no esenciales antes de que el visitante las acepte. La configuración detallada se incorporará cuando se definan los servicios analíticos o de terceros que vayan a utilizarse.</p></main>}
