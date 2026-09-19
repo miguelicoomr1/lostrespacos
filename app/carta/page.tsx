@@ -1,12 +1,17 @@
+import { env } from "cloudflare:workers";
 import { SiteFooter, SiteHeader } from "../../components/site-chrome";
+import { DEFAULT_MENU, MenuEntry } from "../../lib/catalog";
 
-const menu = [
-  ["Tapas", [["Ensaladilla", "4,00€ / 5,00€"],["Patatas con ajo", "3,60€ / 4,70€"],["Marinera / matrimonio", "1,80€"],["Michirones", "4,00€ / 5,00€"],["Bacalao", "4,00€ / 5,00€"],["Boquerones en vinagre", "4,00€ / 6,00€"],["Pulpo a la Paquera", "7,50€ / 10,50€"],["Magra con tomate", "4,50€ / 5,50€"],["Callos", "4,60€ / 7,70€"],["Tortilla de patatas", "5,50€"]]],
-  ["Croquetas", [["Jamón ibérico", "1,20€"],["Merluza", "1,20€"],["Boletus", "1,20€"],["Pollo", "0,90€"],["Pulpo", "1,20€"],["Rabo de toro", "1,20€"],["Salmón", "1,20€"],["Verduras con queso", "1,20€"]]],
-  ["Para picar", [["Bacon cheese", "4,80€"],["Chicken cheese", "5,50€"],["Kebab frites", "5,50€"],["Tacos Pacos de calamares", "6,50€"],["Tabla de quesos y patés", "8,50€"],["Tabla de jamón y queso", "8,00€"],["Patatas clásicas", "2,00€"],["Patatas deluxe", "3,00€ / 4,50€"],["Nachos", "7,00€"],["Alitas de pollo", "4,80€"]]],
-  ["Pescados", [["Dorada a la espalda", "10,50€"],["Pata de pulpo portmanera", "14,20€"],["Fuente de calamares", "8,50€ / 14,50€"],["Calamares a la Paquera", "6,20€ / 8,80€"],["Gambas al ajillo", "4,30€"],["Pulpo", "6,50€ / 9,20€"],["Bacalao a la murciana", "9,50€"],["Emperador con salsa verde", "9,50€"],["Lubina a la plancha", "9,50€"],["Almejas a la marinera", "5,00€"]]],
-  ["Carnes", [["Brocheta de entrecot", "9,50€"],["Brocheta de solomillo", "8,00€"],["Brocheta de pollo", "6,00€"],["Gyozas de pato", "6,80€"],["Plumita ibérica", "9,50€"],["Chuletas de cordero", "12,00€"],["Lomo a la plancha", "6,00€"],["Pechuga a la plancha", "6,00€"],["Rabo de toro", "9,50€"],["Carrillada", "9,80€"]]],
-  ["Ensaladas", [["3Pacos", "8,70€", "Lechuga, tomate, cebolla, espárragos, atún, huevo, queso parmesano y frutos secos"],["César", "7,80€", "Lechuga, pollo rebozado, maíz, queso, picatostes y salsa César"],["Rosa", "7,80€", "Lechuga, pollo rebozado, maíz, queso, picatostes y salsa rosa"],["Gourmet", "9,00€", "Lechuga gourmet, tomate cherry, gambitas y rulo de cabra a la plancha con frutos secos"],["Ahumados", "7,50€", "Salmón, bacalao, tomate y alcaparras"],["Marinera", "9,00€", "Tomate, pimientos, ventresca, anchoas, boquerones y olivas"],["Gazpachada", "6,00€", "Tomate y aceituna gazpachada"]]],
-] as const;
+async function menuFromDatabase(): Promise<MenuEntry[]> {
+  try {
+    if (!env.DB) return DEFAULT_MENU;
+    const result = await env.DB.prepare("SELECT id, category, name, price, description, sort_order AS sortOrder FROM menu_items ORDER BY category, sort_order, id").all<MenuEntry>();
+    return result.results.length ? result.results : DEFAULT_MENU;
+  } catch { return DEFAULT_MENU; }
+}
 
-export default function Carta() { return <main className="page-shell"><SiteHeader current="carta"/><p className="section-label">CARTA</p><h1 className="page-title">Para sentarse,<br />pedir y compartir.</h1><p className="page-lead">Carta transcrita de la documentación facilitada por el establecimiento. Consulta la disponibilidad en sala.</p><div className="menu-grid">{menu.map(([category, dishes])=><section className="menu-section" key={category}><h2>{category}</h2>{dishes.map(([name, price, detail])=><div className="dish" key={name}><p>{name}</p><span>{price}</span>{detail&&<small>{detail}</small>}</div>)}</section>)}</div><SiteFooter/></main> }
+export default async function Carta() {
+  const entries = await menuFromDatabase();
+  const groups = [...new Set(entries.map((item) => item.category))].map((category) => ({ category, dishes: entries.filter((item) => item.category === category) }));
+  return <main className="page-shell"><SiteHeader current="carta"/><p className="section-label">CARTA</p><h1 className="page-title">Para sentarse,<br />pedir y compartir.</h1><p className="page-lead">Carta transcrita de la documentación facilitada por el establecimiento. Consulta la disponibilidad en sala.</p><div className="menu-grid">{groups.map(({ category, dishes })=><section className="menu-section" key={category}><h2>{category}</h2>{dishes.map((item)=><div className="dish" key={item.id || `${item.category}-${item.name}`}><p>{item.name}</p><span>{item.price}</span>{item.description&&<small>{item.description}</small>}</div>)}</section>)}</div><SiteFooter/></main>;
+}
