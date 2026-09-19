@@ -1,17 +1,7 @@
+"use client";
 import Link from "next/link";
-
-export function SiteHeader({ current }: { current?: string }) {
-  return <header className="site-header">
-    <Link href="/" className="site-logo">LOS TRES PACOS</Link>
-    <nav aria-label="Navegación principal" className="site-nav">
-      <Link className={current === "carta" ? "active" : ""} href="/carta">Carta</Link>
-      <Link className={current === "galeria" ? "active" : ""} href="/galeria">Galería</Link>
-      <Link className={current === "contacto" ? "active" : ""} href="/contacto">Contacto</Link>
-    </nav>
-    <Link href="/reservas" className="site-book">Reservar</Link>
-  </header>;
-}
-
-export function SiteFooter() {
-  return <footer className="site-footer"><p>LOS TRES PACOS · PORTMÁN, MURCIA</p><a href="tel:+34968548498">968 54 84 98</a><Link href="/reservas">Reservar mesa</Link></footer>;
-}
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+const links = [["nosotros", "Nosotros", "/nosotros"], ["carta", "Carta", "/carta"], ["galeria", "Galería", "/galeria"], ["contacto", "Contacto", "/contacto"]] as const;
+export function SiteHeader({ current }: { current?: string }) {const [open, setOpen] = useState(false);useEffect(() => { const close = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false); window.addEventListener("keydown", close); return () => window.removeEventListener("keydown", close); }, []);return <header className={`site-header ${open ? "is-open" : ""}`}><Link href="/" className="site-logo" onClick={() => setOpen(false)}>LOS TRES PACOS</Link><nav aria-label="Navegación principal" className="site-nav">{links.map(([id,label,href]) => <Link className={current === id ? "active" : ""} href={href} key={id} onClick={() => setOpen(false)}>{label}</Link>)}</nav><Link href="/reservas" className="site-book" onClick={() => setOpen(false)}>Reservar</Link><button className="menu-toggle" type="button" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(value => !value)}>{open ? <X size={21} /> : <Menu size={22} />}</button><nav id="mobile-navigation" className="mobile-nav" aria-label="Navegación móvil">{links.map(([id,label,href]) => <Link className={current === id ? "active" : ""} href={href} key={id} onClick={() => setOpen(false)}>{label}</Link>)}<Link href="/reservas" onClick={() => setOpen(false)}>Reservar mesa</Link><a href="tel:+34968548498" onClick={() => setOpen(false)}>Llamar · 968 54 84 98</a></nav></header>;}
+export function SiteFooter() { return <footer className="site-footer"><p>LOS TRES PACOS · PORTMÁN, MURCIA</p><a href="tel:+34968548498">968 54 84 98</a><Link href="/reservas">Reservar mesa</Link></footer>; }

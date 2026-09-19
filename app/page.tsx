@@ -1,4 +1,7 @@
+"use client";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 import { CookieBanner } from "../components/cookie-banner";
 
 const highlights = [
@@ -7,10 +10,10 @@ const highlights = [
   ["Michirones", "Tradición murciana en la mesa."],
 ];
 
-export default function Home() {
+export default function Home() { const [open, setOpen] = useState(false);
   return <main>
     <section className="hero" id="inicio">
-      <nav className="nav" aria-label="Navegación principal"><Link href="#inicio" className="wordmark">LOS TRES PACOS</Link><div className="nav-links"><Link href="/carta">Carta</Link><Link href="/galeria">Galería</Link><Link href="/contacto">Contacto</Link></div><Link href="/reservas" className="nav-book">Reservar</Link></nav>
+        <nav className={`nav ${open ? "is-open" : ""}`} aria-label="Navegación principal"><Link href="#inicio" className="wordmark" onClick={() => setOpen(false)}>LOS TRES PACOS</Link><div className="nav-links"><Link href="/nosotros">Nosotros</Link><Link href="/carta">Carta</Link><Link href="/galeria">Galería</Link><Link href="/contacto">Contacto</Link></div><Link href="/reservas" className="nav-book">Reservar</Link><button className="menu-toggle hero-toggle" type="button" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} onClick={() => setOpen(value => !value)}>{open ? <X size={21} /> : <Menu size={22} />}</button><div className="mobile-nav hero-mobile-nav"><Link href="/nosotros" onClick={() => setOpen(false)}>Nosotros</Link><Link href="/carta" onClick={() => setOpen(false)}>Carta</Link><Link href="/galeria" onClick={() => setOpen(false)}>Galería</Link><Link href="/contacto" onClick={() => setOpen(false)}>Contacto</Link><Link href="/reservas" onClick={() => setOpen(false)}>Reservar mesa</Link><a href="tel:+34968548498" onClick={() => setOpen(false)}>Llamar · 968 54 84 98</a></div></nav>
       <div className="hero-photo" aria-hidden="true" /><div className="hero-shade" />
       <div className="hero-copy"><p className="place">PORTMÁN · MURCIA</p><h1>El sabor de<br />estar aquí.</h1><p className="hero-intro">Café, bar y cocina de siempre junto al Mediterráneo.</p><div className="hero-actions"><Link href="/reservas" className="button button-light">Reservar mesa</Link><Link href="/carta" className="text-link">Ver carta <span>↗</span></Link></div></div>
       <div className="ceramic-orbit" aria-hidden="true"><div /><i /><b /></div><p className="hero-scroll">BAJAR PARA DESCUBRIR</p>
