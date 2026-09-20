@@ -1,0 +1,12 @@
+# URLs de la versión anterior (GitHub Pages) → URLs limpias
+/index.html /  301
+/pages/carta.html /carta/ 301
+/pages/reservas.html /reservas/ 301
+/pages/nosotros.html /nosotros/ 301
+/pages/galeria.html /galeria/ 301
+/pages/contacto.html /contacto/ 301
+/carta /carta/ 301
+/reservas /reservas/ 301
+/nosotros /nosotros/ 301
+/galeria /galeria/ 301
+/contacto /contacto/ 301

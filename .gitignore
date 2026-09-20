@@ -1,3 +1,9 @@
 .DS_Store
 Thumbs.db
 .env*
+node_modules/
+dist/
+.claude/
+.dev.vars
+.dev-data/
+.wrangler/

@@ -1,0 +1,11 @@
+# Copia a .dev.vars (local) o crea estos valores en Cloudflare Pages > Settings > Variables and Secrets.
+SUPABASE_URL=https://lhrvufspmvxlrpjlbfni.supabase.co
+SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+# Secretos (nunca en el frontend ni en git):
+SUPABASE_SECRET_KEY=sb_secret_...
+SESSION_SECRET=cadena-aleatoria-larga
+
+# Google Calendar (solo la APLICACIÓN OAuth; la cuenta la elige el administrador desde la zona privada)
+GOOGLE_CLIENT_ID=...apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=GOCSPX-...
+GOOGLE_REDIRECT_URI=http://localhost:4173/api/admin/google/callback

@@ -1,0 +1,20 @@
+// Genera supabase/seed.sql desde functions/_lib/defaults.gen.js (que sale de src/data). Uso: node supabase/gen-seed.mjs
+import { writeFileSync } from "node:fs";
+import d from "../functions/_lib/defaults.gen.js";
+const q = (s) => `'${String(s ?? "").replace(/'/g, "''")}'`;
+const t = (s) => (s ? q(s) : "null");
+const h = d.horarios;
+const out = [];
+out.push("-- Generado por supabase/gen-seed.mjs. Carga inicial; vuelve a ejecutarlo sin duplicar.");
+out.push(`update public.settings set duration_minutes=${h.durationMinutes}, max_party_size=${h.maxPartySize}, slots=array[${h.slots.map(q)}]::text[] where id;`);
+out.push("delete from public.services;");
+if (h.services.length) out.push("insert into public.services (name,from_time,to_time,last_booking,sort) values\n" + h.services.map((s, i) => `(${q(s.name)},${q(s.from)},${q(s.to)},${q(s.lastBooking)},${i})`).join(",\n") + ";");
+if (h.zones.length) out.push("insert into public.zones (id,name,capacity,enabled,sort) values\n" + h.zones.map((z, i) => `(${q(z.id)},${q(z.name)},${z.capacity},${z.enabled},${i})`).join(",\n") + "\non conflict (id) do update set name=excluded.name, capacity=excluded.capacity, enabled=excluded.enabled, sort=excluded.sort;");
+if (h.openingHours.length) out.push("insert into public.opening_hours (day,closed,open1,close1,open2,close2) values\n" + h.openingHours.map((o) => `(${o.day},${o.closed},${t(o.open1)},${t(o.close1)},${t(o.open2)},${t(o.close2)})`).join(",\n") + "\non conflict (day) do update set closed=excluded.closed, open1=excluded.open1, close1=excluded.close1, open2=excluded.open2, close2=excluded.close2;");
+if (h.closedDates.length) out.push("insert into public.closed_dates (date,reason) values\n" + h.closedDates.map((c) => `(${q(c.date)},${q(c.reason)})`).join(",\n") + "\non conflict (date) do update set reason=excluded.reason;");
+out.push("delete from public.menu_items;\ndelete from public.menu_categories;");
+out.push("insert into public.menu_categories (id,name,sort) values\n" + d.carta.map((c, i) => `(${q(c.id)},${q(c.name)},${i})`).join(",\n") + ";");
+const items = d.carta.flatMap((c) => c.items.map((it, i) => `(${q(c.id)},${q(it.name)},${q(it.price)},${q(it.description)},${i})`));
+out.push("insert into public.menu_items (category_id,name,price,description,sort) values\n" + items.join(",\n") + ";");
+writeFileSync(new URL("./seed.sql", import.meta.url), out.join("\n\n") + "\n");
+console.log("seed.sql:", d.carta.length, "categorías,", items.length, "platos,", h.zones.length, "zonas");

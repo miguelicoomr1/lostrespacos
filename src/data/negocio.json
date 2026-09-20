@@ -1,0 +1,38 @@
+{
+  "name": "Los Tres Pacos",
+  "legalType": "Café-bar",
+  "tagline": "Café-bar en Portmán",
+  "phone": { "display": "968 54 84 98", "tel": "+34968548498" },
+  "address": {
+    "street": "C/ Florencia Florenciano, 5",
+    "postalCode": "30392",
+    "locality": "Portmán",
+    "municipality": "La Unión",
+    "region": "Región de Murcia",
+    "country": "ES"
+  },
+  "geo": null,
+  "mapsQuery": "Los Tres Pacos, C/ Florencia Florenciano 5, 30392 Portmán, Murcia",
+  "social": {
+    "facebook": "https://www.facebook.com/lostrespacos",
+    "instagram": "https://www.instagram.com/lospacosportman/"
+  },
+  "reservations": {
+    "durationMinutes": 90,
+    "services": [
+      { "name": "Comida", "from": "13:00", "to": "16:00", "lastBooking": "15:30" },
+      { "name": "Cena", "from": "19:30", "to": "22:30", "lastBooking": "22:30" }
+    ],
+    "slots": ["13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"],
+    "maxPartySize": 10
+  },
+  "zones": [
+    { "id": "salon-interior", "name": "Salón interior", "capacity": 30 },
+    { "id": "salon-exterior", "name": "Salón exterior", "capacity": 70 },
+    { "id": "terraza", "name": "Terraza", "capacity": 50 }
+  ],
+  "openingHours": null,
+  "priceRange": null,
+  "legal": { "holderName": null, "taxId": null, "registeredAddress": null, "email": null },
+  "credit": { "name": "MiguelicooMR1", "url": "https://miguelicoomr1.github.io/portfolio/" }
+}
