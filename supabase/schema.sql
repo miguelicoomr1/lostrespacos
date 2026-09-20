@@ -35,7 +35,7 @@ create table if not exists public.services (
   sort          int  not null default 0
 );
 
--- ───────── Horario semanal (0 = domingo … 6 = sábado) ─────────
+-- ───────── Horario semanal (0 = lunes … 6 = domingo, como el panel) ─────────
 create table if not exists public.opening_hours (
   day     int primary key check (day between 0 and 6),
   closed  boolean not null default false,

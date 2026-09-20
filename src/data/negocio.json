@@ -4,15 +4,15 @@
   "tagline": "Café-bar en Portmán",
   "phone": { "display": "968 54 84 98", "tel": "+34968548498" },
   "address": {
-    "street": "C/ Florencia Florenciano, 5",
-    "postalCode": "30392",
+    "street": "C/ Don Florencio Florenciano, 14",
+    "postalCode": "30364",
     "locality": "Portmán",
     "municipality": "La Unión",
     "region": "Región de Murcia",
     "country": "ES"
   },
   "geo": null,
-  "mapsQuery": "Los Tres Pacos, C/ Florencia Florenciano 5, 30392 Portmán, Murcia",
+  "mapsQuery": "Los Tres Pacos, C/ Don Florencio Florenciano 14, 30364 Portmán, Murcia",
   "social": {
     "facebook": "https://www.facebook.com/lostrespacos",
     "instagram": "https://www.instagram.com/lospacosportman/"
@@ -31,8 +31,11 @@
     { "id": "salon-exterior", "name": "Salón exterior", "capacity": 70 },
     { "id": "terraza", "name": "Terraza", "capacity": 50 }
   ],
-  "openingHours": null,
-  "priceRange": null,
+  "openingHours": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Thursday", "Friday", "Saturday"], "opens": "09:00", "closes": "23:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Sunday"], "opens": "09:00", "closes": "23:00" }
+  ],
+  "priceRange": "10-20 €",
   "legal": { "holderName": null, "taxId": null, "registeredAddress": null, "email": null },
   "credit": { "name": "MiguelicooMR1", "url": "https://miguelicoomr1.github.io/portfolio/" }
 }

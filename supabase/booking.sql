@@ -32,7 +32,7 @@ begin
   end if;
 
   if exists (select 1 from public.closed_dates where date = p_date)
-     or exists (select 1 from public.opening_hours where day = extract(dow from p_date)::int and closed) then
+     or exists (select 1 from public.opening_hours where day = extract(isodow from p_date)::int - 1 and closed) then
     return jsonb_build_object('ok', false, 'code', 'closed');
   end if;
 

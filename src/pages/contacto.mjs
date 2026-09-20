@@ -6,7 +6,7 @@ export default {
   nav: "/contacto/",
   crumb: "Contacto",
   title: "Cómo llegar y contacto · Los Tres Pacos, Portmán",
-  description: "Los Tres Pacos: C/ Florencia Florenciano, 5, 30392 Portmán (La Unión, Murcia). Teléfono 968 54 84 98, ruta en Google Maps, Instagram y Facebook.",
+  description: "Los Tres Pacos: C/ Don Florencio Florenciano, 14, 30364 Portmán (La Unión, Murcia). Teléfono 968 54 84 98, ruta en Google Maps, Instagram y Facebook.",
   jsonld: (ctx, page) => [breadcrumbs(ctx, page)].filter(Boolean),
   body({ n }) {
     const a = n.address;
