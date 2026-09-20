@@ -11,7 +11,7 @@
     "region": "Región de Murcia",
     "country": "ES"
   },
-  "geo": null,
+  "geo": { "lat": 37.58981, "lng": -0.85306 },
   "mapsQuery": "Los Tres Pacos, C/ Don Florencio Florenciano 14, 30364 Portmán, Murcia",
   "social": {
     "facebook": "https://www.facebook.com/lostrespacos",
